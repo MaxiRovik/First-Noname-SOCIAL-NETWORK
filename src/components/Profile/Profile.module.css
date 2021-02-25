@@ -1,0 +1,19 @@
+
+.content {
+  grid-area: c;
+
+  padding:  0 50px;
+  
+
+  background-color:rgb(170, 165, 165);
+
+  display: block;
+    border-radius: 5px;
+
+  height: auto;
+}
+
+.content  img {
+  width: 100% ; 
+  margin:0 auto;
+}

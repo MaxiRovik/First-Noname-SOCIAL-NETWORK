@@ -1,0 +1,16 @@
+.nav {
+  grid-area: n;
+  font-size: 25px;
+  background-color: rgb(23, 28, 32);
+  display: block;
+  padding-left:5px;
+    border-radius: 5px;
+}
+
+.item {
+  color:rgb(240, 240, 243);
+}
+
+.item.active {
+  color:rgb(161, 159, 159);
+}
