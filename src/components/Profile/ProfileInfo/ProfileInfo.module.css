@@ -1,0 +1,12 @@
+
+
+
+.descriptionBblock {
+    margin: 20px;
+}
+
+.pictures {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+}

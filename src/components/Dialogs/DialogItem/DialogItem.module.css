@@ -1,0 +1,27 @@
+
+.dialog {
+    padding: 5px;
+}
+
+.dialog a {
+    text-decoration: none;
+    color:white;
+}
+
+.dialog a.active {
+    color: #000000;
+}
+
+.ItemBlock {
+    display: flex;
+    margin: 5px auto;
+}
+
+.ItemPicture {
+    margin:5px;
+    width: 50px;
+}
+
+.ItemPicture img {
+    width:100%;
+}
