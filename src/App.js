@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
@@ -21,9 +20,12 @@ const App = (props) => {
                 <Navbar state={props.state.dialogsPage}/>
                 <div className="app-wrapper-content">
                     <Route path='/dialogs'
-                           render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                           render={() => <Dialogs state={props.dialogsPage}/>}/>
                     <Route path='/profile'
-                           render={() => <Profile state={props.state.profilePage} />}/>
+                           render={() => <Profile
+                               profilePage={props.profilePage}
+                               updatePostText ={props.updatePostText}
+                               addPost={props.addPost}/>}/>
                     <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
                     <Route path='/settings' component={Settings} />
