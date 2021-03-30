@@ -21,6 +21,8 @@
 
 .app-wrapper-content {
   grid-area: c;
+  height: 100vh;
+  /*overflow: hidden;*/
 
   padding:  20px 20px;
 
