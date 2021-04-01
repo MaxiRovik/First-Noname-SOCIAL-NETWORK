@@ -3,7 +3,6 @@ import classes from './NavBar.module.css';
 import {NavLink} from "react-router-dom";
 
 const navBar = (props) => {
-
     let navBarFriends = props.state.dialogs.map(friend => {
         return(
             <div className={classes.friends}>
