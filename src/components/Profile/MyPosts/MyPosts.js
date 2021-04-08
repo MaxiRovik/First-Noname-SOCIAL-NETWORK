@@ -24,13 +24,13 @@ let postsElement = props.posts.map( post =>
         <div>
             <div>
                 <textarea className = {classes.textArea}
-                          onChange={onPostChange}
-                          ref={newPostElement}
-                          value={props.newPostText}/>
+                          onChange = {onPostChange}
+                          ref = {newPostElement}
+                          value = {props.newPostText}/>
             </div>
             <div>
                 <button className = {classes.submitButton}
-                        onClick={onAddPost}>Add post</button>
+                        onClick = {onAddPost}>Add post</button>
             </div>
 
         </div>

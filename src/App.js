@@ -8,6 +8,8 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings'
 import {Route} from "react-router-dom";
 import ConnectDialogsContainer from "./components/Dialogs/DialogsContainer";
+import ConnectUsersContainer from "./components/Users/UsersContainer";
+
 
 
 
@@ -21,6 +23,8 @@ const App = (props) => {
                            render={ () => <ConnectDialogsContainer/>} />
                     <Route path='/profile'
                            render={ () => <Profile/> } />
+                    <Route path='/users'
+                           render={ () => <ConnectUsersContainer/> } />
                     <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
                     <Route path='/settings' component={Settings} />

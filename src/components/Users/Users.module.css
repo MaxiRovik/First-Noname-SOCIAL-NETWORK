@@ -1,0 +1,56 @@
+.usersBlock {
+    display: block;
+    margin:5px auto;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.46);
+    padding: 10px;
+}
+.usersContainer {
+    display: flex;
+    margin:5px auto;
+    border-radius: 5px;
+    background-color: rgba(26, 163, 189, 0.2);
+}
+.usersInfo {
+    color:white;
+
+    display: flex;
+    padding:10px;
+    width: 100%;
+    margin:10px 10px 5px 5px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.usersNameAndStatus{
+    font-size: 20px;
+    font-family: "Yu Gothic UI Light";
+    display: block;
+    width:80%;
+    margin:5px auto;
+    border-radius: 5px;
+    background-color: rgba(26, 163, 189, 0.15);
+    padding: 10px;
+}
+.name {
+    color: greenyellow;
+    font-size: 30px;
+
+}
+.img {
+    width: 130px;
+    height:100px;
+}
+.buttonFollowed {
+    color:white;
+    background-color: green;
+    width:65px;
+    height: 30px;
+    border-radius: 5px;
+}
+.buttonUnfollowed {
+    color:white;
+    background-color: #808080;
+    width:65px;
+    height: 30px;
+    border-radius: 5px;
+}
