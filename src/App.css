@@ -1,6 +1,7 @@
 .app-wrapper {
   display: grid;
 
+
   grid-template-areas: 
   "h h" 
   "n c";
@@ -27,9 +28,10 @@
   padding:  20px 20px;
 
 
-  background-color: rgba(170, 165, 165, 0.7);
+  background-color: rgba(138, 128, 128, 0.7);
 
   display: block;
+
   width: 90%;
   border-radius: 5px;
 

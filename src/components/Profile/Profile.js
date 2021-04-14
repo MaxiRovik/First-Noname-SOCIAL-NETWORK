@@ -6,11 +6,12 @@ import ConnectMyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
 
-const Profile = () => {
+const Profile = (props) => {
     return (
-        <div>
-            <ProfileInfo/>
-            <ConnectMyPostsContainer  /*store={props.store}*//>
+        <div className={classes.profileWrapper}>
+            <div> {props.a}</div>
+            <ProfileInfo profile = {props.profile} />
+            <ConnectMyPostsContainer />
         </div>
     )
 

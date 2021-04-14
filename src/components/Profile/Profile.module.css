@@ -1,0 +1,7 @@
+.profileWrapper{
+    display: block;
+    margin: 5px auto;
+    padding: 10px;
+    background-color: rgba(109, 67, 182, 0.47);
+    border-radius: 5px;
+}

@@ -9,6 +9,7 @@ import Settings from './components/Settings/Settings'
 import {Route} from "react-router-dom";
 import ConnectDialogsContainer from "./components/Dialogs/DialogsContainer";
 import ConnectUsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 
@@ -22,7 +23,7 @@ const App = (props) => {
                     <Route path='/dialogs'
                            render={ () => <ConnectDialogsContainer/>} />
                     <Route path='/profile'
-                           render={ () => <Profile/> } />
+                           render={ () => <ProfileContainer a={66666666666}/> } />
                     <Route path='/users'
                            render={ () => <ConnectUsersContainer/> } />
                     <Route path='/news' component={News} />

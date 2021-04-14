@@ -6,9 +6,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #94dadc;
-  background-image: url(https://www.atomic-energy.ru/files/images/2020/07/5d79db75c65f3.jpeg);
- 
+
+  /*background-image: url(https://www.atomic-energy.ru/files/images/2020/07/5d79db75c65f3.jpeg);*/
+  background-color: rgba(76, 113, 115, 0.51);
 }
 
 code {

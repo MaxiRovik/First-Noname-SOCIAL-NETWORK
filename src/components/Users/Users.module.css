@@ -54,3 +54,9 @@
     height: 30px;
     border-radius: 5px;
 }
+.selectedPage {
+    font-weight: bold;
+    color: greenyellow;
+    margin:0 5px;
+
+}
