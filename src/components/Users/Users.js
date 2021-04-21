@@ -2,6 +2,7 @@ import React from 'react';
 import userPhoto from '../../assets/img/user.png';
 import classes from '../Users/Users.module.css';
 import {NavLink} from "react-router-dom";
+import {usersAPI} from "../../api/api";
 
 
 const Users = (props) => {
@@ -12,6 +13,8 @@ const Users = (props) => {
     for (let i=1; i<=pagesCount; i++) {
         pages.push(i);
     }
+
+
 
     return <div className={classes.usersBlock}>
         <div>
@@ -27,24 +30,29 @@ const Users = (props) => {
         {props.users.map(e => (
             <div key={e.id} className={classes.usersContainer}>
                 <div>
+
                     <div>
                         <NavLink to = {'/profile/' + e.id}>
                              <img className={classes.img} src={e.photos.small != null ? e.photos.small : userPhoto}/>
                         </NavLink>
                     </div>
+
+
                     <div>
                         {e.followed
-                            ? <button onClick={() => {
-                                props.unFollow(e.id)
-                            }} className={classes.buttonFollowed}>
+                            ? <button  disabled = {props.setOfFollowingInProgress.some(id =>id === e.id)}
+                                       onClick={() => {props.setUnfollow(e.id)}}
+                                       className={classes.buttonFollowed}>
                                 Follow
                             </button>
-                            : <button onClick={() => {
-                                props.follow(e.id)
-                            }} className={classes.buttonUnfollowed}>
-                                Unfollow
+
+                            : <button   disabled ={props.setOfFollowingInProgress.some(id =>id === e.id)}
+                                        onClick={() => {props.setFollow(e.id)}}
+                                        className={classes.buttonUnfollowed}>
+                                unFollow
                             </button>}
                     </div>
+
                 </div>
                 <div className={classes.usersInfo}>
                     <div className={classes.usersNameAndStatus}>
