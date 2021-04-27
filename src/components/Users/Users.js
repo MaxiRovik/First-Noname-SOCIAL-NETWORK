@@ -14,8 +14,6 @@ const Users = (props) => {
         pages.push(i);
     }
 
-
-
     return <div className={classes.usersBlock}>
         <div>
             {pages.map((p) => {

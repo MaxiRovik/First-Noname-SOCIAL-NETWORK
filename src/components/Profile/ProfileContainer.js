@@ -1,11 +1,12 @@
 import React from 'react';
 import Profile from "./Profile";
-import * as axios from 'axios';
-
 import {connect} from "react-redux";
-import {setUserProfile} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
-import {profileAPI} from "../../api/api";
+import {getProfileInfo, getStatus,  updateStatus} from "../../redux/profile-reducer";
+
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import compose from "redux/src/compose";
+
 
 
 class ProfileContainer extends React.Component{
@@ -13,29 +14,31 @@ class ProfileContainer extends React.Component{
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = 16538;
         }
+        this.props.getProfileInfo(userId);
+        this.props.getStatus(userId);
 
-        profileAPI.getProfile(userId)
-            .then(data => {
-                this.props.setUserProfile(data)
-
-            });
 
     }
-
+componentDidUpdate() {
+        console.log('докладываю: я контейнерная компонента, у меня  произошел Update')
+}
     render() {
-        return <Profile {...this.props} profile ={this.props.profile}/>
-
+        console.log('перерисовал весь контейнер профайла')
+        return <Profile {...this.props} profile ={this.props.profile}
+                        status = {this.props.status}
+                        updateStatus = {this.props.updateStatus}/>
     }
 };
 
 let mapStateToProps = (state) => {
     return {
-profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
-}
+};
 
-
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
-export default connect(mapStateToProps, {setUserProfile}) (WithUrlDataContainerComponent);
+export default compose(connect(mapStateToProps, {getProfileInfo, getStatus, updateStatus}),
+    withRouter,
+    withAuthRedirect)(ProfileContainer)

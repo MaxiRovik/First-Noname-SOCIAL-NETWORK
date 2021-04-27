@@ -9,7 +9,7 @@ import ConnectDialogsContainer from "./components/Dialogs/DialogsContainer";
 import ConnectUsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-
+import LoginPage from  "./components/Login/Login"
 
 
 
@@ -25,6 +25,7 @@ const App = (props) => {
                            render={ () => <ProfileContainer a={66666666666}/> } />
                     <Route path='/users'
                            render={ () => <ConnectUsersContainer/> } />
+                    <Route path='/login' component={LoginPage} />
                     <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
                     <Route path='/settings' component={Settings} />

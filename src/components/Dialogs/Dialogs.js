@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import  Message from './Message/Message'
+import {Redirect} from "react-router-dom";
 
 const Dialogs=(props) => {
 
@@ -11,12 +12,12 @@ const Dialogs=(props) => {
 
     let onAddMessage = () => {
         props.addMessage()
-    }
+    };
 
     let onNewMessage = (e) => {
        let text= e.target.value;
       props.newMessageEvent(text);
-    }
+    };
 
     return (
         <div className={classes.dialogs}>

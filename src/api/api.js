@@ -26,8 +26,32 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
-    }
+    },
+
 };
+
+export const profileAPI = {
+    getProfile(userId){
+    return instance.get('profile/' + userId)
+        .then(response => {
+            return response.data
+        })
+    },
+    getStatus(userId) {
+        return instance.get('profile/status/' + userId)
+            .then(response => {
+                return response
+            })
+    },
+    updateStatus(status){
+        return instance.put('profile/status/',{status:status})
+            .then(response => {
+                    return response.data
+
+            })
+    }
+}
+
 
 export const authAPI = {
     authMe(){
@@ -38,13 +62,5 @@ export const authAPI = {
     }
 };
 
-export const profileAPI = {
-    getProfile(userId){
-        return instance.get('profile/' + userId)
-            .then(response => {
-                return response.data
-            })
-    }
-};
 
 

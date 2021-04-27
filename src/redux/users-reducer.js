@@ -75,7 +75,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 setOfFollowingInProgress: action.followingButtonState
                     ?[...state. setOfFollowingInProgress,action.userId]
-                    : state. setOfFollowingInProgress.filter(id =>id != action.userId)
+                    : state. setOfFollowingInProgress.filter(id =>id !== action.userId)
             }
         }
         default:
@@ -111,7 +111,7 @@ export const setUnfollow =(userId) => {
 
         usersAPI.setUnfollow(userId)
             .then(data => {
-                if  (data.resultCode == 0) {
+                if  (data.resultCode === 0) {
                     dispatch(clickOnUnFollow(userId))
                 }
                 dispatch(toggleFollowingButton(false,userId));
@@ -125,7 +125,7 @@ export const setFollow =(userId) => {
 
         usersAPI.setFollow(userId)
             .then(data => {
-                if (data.resultCode == 0) {
+                if (data.resultCode === 0) {
                     dispatch(clickOnFollow(userId))
                 }
                 dispatch(toggleFollowingButton(false, userId));
