@@ -1,23 +1,38 @@
 import React from 'react';
 import classes from './Dialogs.module.css'
-import DialogItem from './DialogItem/DialogItem'
-import  Message from './Message/Message'
-import {Redirect} from "react-router-dom";
+import {Field,reduxForm} from "redux-form";
+import Message from "./Message/Message";
+import DialogItem from "./DialogItem/DialogItem";
+import {TextArea} from "../common/Forms Controls/FormsControls";
+import {maxLengthCreator, required} from "../../Utilities/validators";
 
-const Dialogs=(props) => {
+const maxLength50 = maxLengthCreator(50)
 
- let dialogsElements = props.dialogsPage.dialogs.map( dialog => < DialogItem name = {dialog.name} id = {dialog.id} picture = {dialog.picture}/>);
- let messagesElement = props.dialogsPage.messages.map( item =>  <Message  message = {item.message} />);
- let newMessageText = props.dialogsPage.newMessageText;
+const MessageTextForm = (props) => {
+    return (
+        <form onSubmit = {props.handleSubmit}>
+            <div>
+                <Field component={TextArea} name = "newMessageText"
+                       placeholder="Enter you message"
+                       validate={[required, maxLength50 ]}/>
+            </div>
+            <div>
+                 <button>Send </button>
+            </div>
+        </form>
+    )
+};
 
-    let onAddMessage = () => {
-        props.addMessage()
-    };
+const MessageTextReduxForm = reduxForm({form:"dialogTextForm"})(MessageTextForm)
 
-    let onNewMessage = (e) => {
-       let text= e.target.value;
-      props.newMessageEvent(text);
-    };
+
+const Dialogs =(props) => {
+
+    let dialogsElements = props.dialogsPage.dialogs.map( dialog => < DialogItem name = {dialog.name} id = {dialog.id} picture = {dialog.picture}/>);
+    let messagesElement = props.dialogsPage.messages.map( item =>  <Message  message = {item.message} />);
+    let newMessageWasCreate = (values) => {
+    props.addMessage(values.newMessageText);
+};
 
     return (
         <div className={classes.dialogs}>
@@ -27,21 +42,13 @@ const Dialogs=(props) => {
             </div>
             <div className={classes.messages}>
                 {messagesElement}
-                <div>
-                    <div>
-                        <textarea
-                                  placeholder="Enter you message"
-                                  value = {newMessageText}
-                                  onChange={onNewMessage}/>
-                    </div>
-                    <div>
-                        <button onClick={onAddMessage}>Send </button>
-                    </div>
-                </div>
+
+                <MessageTextReduxForm onSubmit = {newMessageWasCreate}/>
+
             </div>
 
         </div>
     )
 }
 
-export default Dialogs
+export default Dialogs;

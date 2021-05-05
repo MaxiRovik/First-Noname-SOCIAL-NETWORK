@@ -17,6 +17,5 @@ const Profile = (props) => {
             <ConnectMyPostsContainer />
         </div>
     )
-
 };
 export default Profile;
