@@ -27,17 +27,25 @@ export const  setAuthUserData = (userId, email, login, isAuth) => ({type: SET_US
 
 
 export const authUser = () => {
-    return(dispatch) => {
-        authAPI.authMe()
-            .then(data => {
-
-                if (data.resultCode ===0) { debugger
-                    let {id, email, login} = data.data;
-                    dispatch(setAuthUserData(id, email, login, true))
-                }
-            });
-    }
+    return  async(dispatch) => {
+      let data =  await authAPI.authMe();
+        if (data.resultCode ===0) {
+            let {id, email, login} = data.data;
+            dispatch(setAuthUserData(id, email, login, true))
+        }
+    };
 };
+
+// return(dispatch) => {
+//     return authAPI.authMe()
+//         .then(data => {
+//
+//             if (data.resultCode ===0) {
+//                 let {id, email, login} = data.data;
+//                 dispatch(setAuthUserData(id, email, login, true))
+//             }
+//         });
+// };
 
 export const login = (email, password, rememberMe) => {
     return(dispatch) => {

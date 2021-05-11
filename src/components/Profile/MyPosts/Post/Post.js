@@ -7,7 +7,7 @@ const Post = (props) => {
         <div className = {classes.item}>
 
             <img src='https://m.buro247.ru/images/senina/max-baskakov-OzAeZPNsLXk-unsplash.jpg' alt='#'/>
-            {'Это то что приходит с props - ' + props.message}
+            {props.message}
 
             <div>
                 <span>like</span>

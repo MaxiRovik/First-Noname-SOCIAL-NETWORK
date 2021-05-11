@@ -5,6 +5,10 @@ import {follow, unFollow, toggleFollowingButton, getUsers, setUnfollow, setFollo
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import compose from "redux/src/compose";
+import {
+    getAllUsersData, getCurrentPage, getFollowingInProgress, getStateOfIsFetching, getTotalUsersCount,
+    getUsersSumInPage, pushFollowingInProgress
+} from "../../redux/users-selectors";
 
 
 
@@ -38,23 +42,29 @@ class UsersContainer extends React.Component {
     }
 }
 
+// const mapStateToProps = (state) => {
+//     return {
+//         users: state.usersPage.users,
+//         usersInPage: state.usersPage.usersInPage,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         setOfFollowingInProgress: state.usersPage.setOfFollowingInProgress
+//     }
+// };
+
 const mapStateToProps = (state) => {
-
     return {
-        users: state.usersPage.users,
-        usersInPage: state.usersPage.usersInPage,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        setOfFollowingInProgress: state.usersPage.setOfFollowingInProgress
+        users: getAllUsersData(state) ,
+        usersInPage: getUsersSumInPage(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getStateOfIsFetching(state),
+        setOfFollowingInProgress: getFollowingInProgress(state)
     }
-}
-
-
-let AuthRedirectComponent = withAuthRedirect(UsersContainer);
-
+};
 
 export default compose(
     connect(mapStateToProps,
         {getUsers,setUnfollow,setFollow}),
-    withAuthRedirect)(UsersContainer)
+    /*withAuthRedirect*/)(UsersContainer)

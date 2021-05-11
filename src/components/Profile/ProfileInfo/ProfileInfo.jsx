@@ -3,6 +3,7 @@ import classes from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from '../../../assets/img/user.png';
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from "./ProfileStatusHooks";
 
 
 const ProfileInfo = (props) => {
@@ -11,7 +12,6 @@ const ProfileInfo = (props) => {
         <Preloader/>
     )}
         else {
-
             return (
                 <div>
                     <div >
@@ -28,7 +28,7 @@ const ProfileInfo = (props) => {
                         </div>
 
 
-                        <ProfileStatus status={props.status}
+                        <ProfileStatusWithHooks status={props.status}
                                        updateStatus={props.updateStatus}/>
 
                         <h3> About Me :</h3>

@@ -27,6 +27,7 @@ const PostForm = (props) => {
 const PostReduxForm = reduxForm({form:"addNewPost"})(PostForm);
 
 const MyPosts = (props) => {
+    console.log("render")
 
 let postsElement = props.posts.map( post =>
     <Post message = {post.message} likesCount = {post.likesCount} />);
