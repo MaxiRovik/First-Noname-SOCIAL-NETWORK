@@ -6,6 +6,7 @@ import {TextArea} from "../../common/Forms Controls/FormsControls";
 import Post from "./Post/Post";
 
 
+
 const maxLength10 = maxLengthCreator(10)
 
 const PostForm = (props) => {
@@ -27,16 +28,19 @@ const PostForm = (props) => {
 const PostReduxForm = reduxForm({form:"addNewPost"})(PostForm);
 
 const MyPosts = (props) => {
-    console.log("render")
 
 let postsElement = props.posts.map( post =>
-    <Post message = {post.message} likesCount = {post.likesCount} />);
+    <Post postId = {post.id}
+          key = {post.id}
+          message = {post.message}
+          likesCount = {post.likesCount}
+          deletePost ={props.deletePost}/>);
 
 
 let onAddPost = (value) => {
-
     props.addPost(value.post);
 };
+
 
     return (
       <div className = {classes.postsBlock }>

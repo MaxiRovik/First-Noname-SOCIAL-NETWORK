@@ -28,6 +28,8 @@ class ProfileContainer extends React.Component{
 componentDidUpdate() {
         console.log('докладываю: я контейнерная компонента, у меня  произошел Update')
 };
+
+
     render() {
         console.log('перерисовал весь контейнер профайла')
         return <Profile {...this.props}

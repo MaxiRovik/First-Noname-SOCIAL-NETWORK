@@ -1,0 +1,24 @@
+.selectedPage {
+    font-size: medium;
+    font-weight: bold;
+    color: #426365;
+    margin:0 5px;
+}
+
+.paginationBlock {
+    margin: 0 auto;
+    background-color: rgba(127, 255, 212, 0.33);
+    border-radius:5px;
+    height: 30px;
+    width: max-content;
+    box-shadow: 10px 5px 5px rgba(70, 250, 255, 0.69);
+}
+.paginationBlock .paginationButton {
+    margin:5px;
+    display: inline-block;
+    box-shadow: 10px 5px 5px rgba(70, 250, 255, 0.69);;
+    border-radius: 3px;
+    border: none;
+    background-color: rgb(152, 188, 189);
+}
+

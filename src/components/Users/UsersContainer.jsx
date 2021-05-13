@@ -13,17 +13,16 @@ import {
 
 
 class UsersContainer extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     alert('new object created')
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage,this.props.usersInPage)
+        const {currentPage, usersInPage} = this.props;
+        this.props.getUsers(currentPage,usersInPage)
     }
 
     pageChangeEvent = (pageNumber) => {
-        this.props.getUsers(pageNumber,this.props.usersInPage)
-    }
+        const {usersInPage} = this.props;
+        this.props.getUsers(pageNumber,usersInPage)
+    };
 
     render() {
         return <>
@@ -41,17 +40,6 @@ class UsersContainer extends React.Component {
         </>
     }
 }
-
-// const mapStateToProps = (state) => {
-//     return {
-//         users: state.usersPage.users,
-//         usersInPage: state.usersPage.usersInPage,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         setOfFollowingInProgress: state.usersPage.setOfFollowingInProgress
-//     }
-// };
 
 const mapStateToProps = (state) => {
     return {

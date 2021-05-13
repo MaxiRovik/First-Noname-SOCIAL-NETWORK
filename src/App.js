@@ -1,16 +1,17 @@
 import React from 'react';
 import './App.css';
+import store from './redux/redux-store';
 import NavBar from './components/NavBar/NavBar';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings'
-import {Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import ConnectDialogsContainer from "./components/Dialogs/DialogsContainer";
 import ConnectUsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from  "./components/Login/Login"
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 
@@ -34,7 +35,7 @@ class App extends React.Component  {
                         <Route path='/dialogs'
                                render={() => <ConnectDialogsContainer/>}/>
                         <Route path='/profile/:userId?'
-                               render={() => <ProfileContainer a={66666666666}/>}/>
+                               render={() => <ProfileContainer/>}/>
                         <Route path='/users'
                                render={() => <ConnectUsersContainer/>}/>
                         <Route path='/login' component={LoginPage}/>
@@ -54,5 +55,16 @@ class App extends React.Component  {
 const mapStateToProps = (state)=>({
     initialized: state.app.initialized
 });
-export default connect (mapStateToProps,{initializeApp})(App);
+const AppContainer = connect (mapStateToProps,{initializeApp})(App);
+
+
+let SocialNetworkApp = (props) => {
+   return <BrowserRouter>
+        <Provider store = {store}>
+            <AppContainer  />
+        </Provider>
+    </BrowserRouter>
+};
+
+export default SocialNetworkApp ;
 

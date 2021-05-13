@@ -2,8 +2,14 @@ import React from 'react';
 import classes from './Post.module.css'
 
 const Post = (props) => {
+
+let postId  = props.postId;
+let onDeletePost =(postId) =>{
+    props.deletePost(postId)
+    };
+
     return (
-   
+
         <div className = {classes.item}>
 
             <img src='https://m.buro247.ru/images/senina/max-baskakov-OzAeZPNsLXk-unsplash.jpg' alt='#'/>
@@ -14,9 +20,14 @@ const Post = (props) => {
                 <span>{props.likesCount}</span>
             </div>
 
+            <button  style ={{backgroundColor:"blue"}}onClick={()=> onDeletePost(postId)} > Delete post  </button>
       </div>
+
                     
         )
 
 }
 export default Post;
+
+
+
