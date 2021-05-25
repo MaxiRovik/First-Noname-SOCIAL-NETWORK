@@ -33,24 +33,31 @@ export const usersAPI = {
 export const profileAPI = {
     getProfile(userId){
         return instance.get('profile/' + userId)
-        .then(response => {
-            return response.data
-        })
+        .then(response => response.data)
     },
     getStatus(userId) {
         return instance.get('profile/status/' + userId)
-            .then(response => {
-                return response
-            })
+            .then(response => response)
     },
     updateStatus(status){
         return instance.put('profile/status/',{status:status})
-            .then(response => {
-                    return response.data
-
-            })
+            .then(response => response.data)
+    },
+    savePhoto(file) {
+        let formData = new FormData();
+        formData.append("image",file);
+        return instance.put('profile/photo',formData, {
+            headers: {
+                'Content-Type':'multipart/form-data'
+            }
+        })
+            .then(response => response.data)
+    },
+    changeProfileData(data) {
+        return instance.put('profile', data)
+            .then(response => response)
     }
-}
+};
 
 
 export const authAPI = {
@@ -67,6 +74,8 @@ export const authAPI = {
         return instance.delete(`auth/login`);
     }
 };
+
+
 
 
 

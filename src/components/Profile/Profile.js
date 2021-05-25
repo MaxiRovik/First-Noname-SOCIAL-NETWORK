@@ -10,10 +10,12 @@ const Profile = (props) => {
 
     return (
         <div className={classes.profileWrapper}>
-            <div> {props.a}</div>
             <ProfileInfo profile = {props.profile}
+                         isOwner = {props.isOwner}
                          status = {props.status}
-                         updateStatus={props.updateStatus}/>
+                         updateStatus = {props.updateStatus}
+                         changeProfileData = {props.changeProfileData}
+                         savePhoto = {props.savePhoto}/>
             <ConnectMyPostsContainer />
         </div>
     )

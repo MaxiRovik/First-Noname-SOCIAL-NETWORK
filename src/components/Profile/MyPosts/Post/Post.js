@@ -20,7 +20,7 @@ let onDeletePost =(postId) =>{
                 <span>{props.likesCount}</span>
             </div>
 
-            <button  style ={{backgroundColor:"blue"}}onClick={()=> onDeletePost(postId)} > Delete post  </button>
+            <button  style ={{backgroundColor:"orange"}}onClick={()=> onDeletePost(postId)} > Delete post  </button>
       </div>
 
                     

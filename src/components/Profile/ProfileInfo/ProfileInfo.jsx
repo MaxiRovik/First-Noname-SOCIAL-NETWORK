@@ -1,61 +1,96 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from '../../../assets/img/user.png';
-import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from "./ProfileStatusHooks";
+import ProfileDataBlockForm from "./ProfileDataBlockForm";
 
 
 const ProfileInfo = (props) => {
-    if  (!props.profile) {
+    const [editMode,setEditStatus] = useState(false);
+    const editProfile = () => {
+        setEditStatus(true)
+    };
+
+    if  (!props.profile ) {
         return (
         <Preloader/>
     )}
-        else {
-            return (
-                <div>
-                    <div >
-                        {/*<img className={classes.pictures}*/}
-                             {/*src ='https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/%D0%9D%D0%BE%D1%87%D0%BD%D0%BE%D0%B9_%D0%AD%D0%BD%D0%B5%D1%80%D0%B3%D0%BE%D0%B4%D0%B0%D1%80.jpg/1200px-%D0%9D%D0%BE%D1%87%D0%BD%D0%BE%D0%B9_%D0%AD%D0%BD%D0%B5%D1%80%D0%B3%D0%BE%D0%B4%D0%B0%D1%80.jpg'>*/}
-                        {/*</img>*/}
-                    </div>
+    else {
+        const returnFromEdit = () => {
+            setEditStatus(false)
+        };
+        const downloadPhotoSelected = (e) => {
+            if (e.target.files.length) {
+                props.savePhoto(e.target.files[0])
+            }
+        };
+            return <div className={classes.descriptionBlock}>
+                        <img className={classes.img}
+                             src = {props.profile.photos.large ? props.profile.photos.large : userPhoto}/>
+                        {props.isOwner &&
+                            //download avatar
+                        <input type={"file"}
+                               className={classes.chooseFile}
+                               onChange={downloadPhotoSelected}/>
+                        }
 
-                    <div className={classes.descriptionBlock}>
-
-                        <img className={classes.img} src = {props.profile.photos.large ? props.profile.photos.large : userPhoto}/>
-                        <div className={classes.name} >
-                            <h2> {props.profile.fullName}</h2>
+                        {editMode ? <ProfileDataBlockForm profile={props.profile}
+                                                          changeProfileData={props.changeProfileData}
+                                                          returnFromEdit = {returnFromEdit}/>
+                                  : <ProfileDataBlock profile={props.profile}
+                                                      isOwner = {props.isOwner}
+                                                      editProfile = {editProfile}/>
+                        }
+                        <div>
+                            <b>Status:</b> <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                         </div>
 
-
-                        <ProfileStatusWithHooks status={props.status}
-                                       updateStatus={props.updateStatus}/>
-
-                        <h3> About Me :</h3>
-                        <div className={classes.about}>
-
-                            <p>{props.profile.aboutMe}></p>
-                        </div>
-                        <h3>Контакты:</h3>
-                        <div className={classes.contacts}>
-
-                                <div>
-                                        <p> Facebook:</p>
-                                        <p> {props.profile.contacts.facebook}</p>
-                                </div>
-                                  <div>
-                                        <p>Vk:</p>
-                                        <p>{props.profile.contacts.vk}</p>
-                                 </div>
-                        </div>
-                    </div>
-
-                </div>
-            )
+            </div>
         }
+    };
 
-    }
+const ProfileDataBlock = (props) => {
+    return <div>
+        <div className={classes.name} >
+            <h2> {props.profile.fullName}</h2>
+        </div>
 
 
+        <div className={classes.about}>
+            <b> About Me :</b>
+                <p>{props.profile.aboutMe}</p>
+        </div>
+
+        <div>
+            <b>Looking for a job</b>: {props.profile.lookingForAJob ? "Yes" : "No"}
+                <div className={classes.lookingForAJobDescription}>
+                    {props.profile.lookingForAJob &&
+                    <div>
+                        <b>My professional skills</b>: {props.profile.lookingForAJobDescription}
+                    </div>
+                    }
+                </div>
+        </div>
+
+        <div className={classes.contacts}>
+            <b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
+            return <Contact key = {key}
+                            contactTytle={key}
+                            contactValue={props.profile.contacts[key]}/>
+        })}
+        </div>
+        {props.isOwner &&  <button onClick = {props.editProfile}>Edit Profile</button>}
+
+
+    </div>
+};
+
+
+const Contact = ({contactTytle, contactValue}) =>{
+    return <div>
+        <b className={classes.contactsTytle}>{contactTytle}: </b>{contactValue}
+    </div>
+};
 
 export default ProfileInfo;

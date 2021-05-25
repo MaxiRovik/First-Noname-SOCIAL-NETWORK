@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense}from 'react';
 import './App.css';
 import store from './redux/redux-store';
 import NavBar from './components/NavBar/NavBar';
@@ -6,7 +6,6 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings'
 import {BrowserRouter, Route} from "react-router-dom";
-import ConnectDialogsContainer from "./components/Dialogs/DialogsContainer";
 import ConnectUsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -15,6 +14,9 @@ import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 
+
+const ConnectDialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
+// const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 
 class App extends React.Component  {
 
@@ -33,9 +35,13 @@ class App extends React.Component  {
                     <NavBar/>
                     <div className="app-wrapper-content">
                         <Route path='/dialogs'
-                               render={() => <ConnectDialogsContainer/>}/>
+                               render={() => <Suspense fallback = {<div> Laading....</div>}>
+                                                 <ConnectDialogsContainer/>
+                                            </Suspense>}/>
                         <Route path='/profile/:userId?'
-                               render={() => <ProfileContainer/>}/>
+                               render={() =>
+                                                <ProfileContainer/>}/>
+
                         <Route path='/users'
                                render={() => <ConnectUsersContainer/>}/>
                         <Route path='/login' component={LoginPage}/>

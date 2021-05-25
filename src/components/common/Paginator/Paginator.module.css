@@ -3,6 +3,8 @@
     font-weight: bold;
     color: #426365;
     margin:0 5px;
+    box-shadow: 10px 5px 5px rgba(70, 250, 255, 0.69);
+
 }
 
 .paginationBlock {
