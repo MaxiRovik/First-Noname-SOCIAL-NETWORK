@@ -1,13 +1,15 @@
-import {authAPI} from "../api/api";
+import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form"
 
 const SET_USER_DATA  = 'SET_USER_DATA';
+const GET_CAPTCHA_URL_SUCCESS  = 'GET_CAPTCHA_URL_SUCCESS ';
 
 let initialState = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    captchaUrl: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -17,13 +19,25 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.payload
             };
+        case GET_CAPTCHA_URL_SUCCESS:
+            return {
+                ...state,
+                captchaUrl: action.payload
+            };
         default:
             return state;
     }
 };
 
-export const  setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload:
-    {email, userId, login,isAuth}});
+export const  setAuthUserData = (userId, email, login, isAuth) => (
+    {type: SET_USER_DATA,
+        payload: {email, userId, login,isAuth}});
+
+export const  setCaptchaUrl = (captchaUrl) => (
+    {type: GET_CAPTCHA_URL_SUCCESS,
+        payload: captchaUrl});
+
+
 
 
 export const authUser = () => {
@@ -36,25 +50,17 @@ export const authUser = () => {
     };
 };
 
-// return(dispatch) => {
-//     return authAPI.authMe()
-//         .then(data => {
-//
-//             if (data.resultCode ===0) {
-//                 let {id, email, login} = data.data;
-//                 dispatch(setAuthUserData(id, email, login, true))
-//             }
-//         });
-// };
-
-export const login = (email, password, rememberMe) => {
+export const login = (email, password, rememberMe, captcha) => {
     return(dispatch) => {
-        authAPI.login(email, password, rememberMe)
+        authAPI.login(email, password, rememberMe, captcha)
             .then(response => {
-
                 if (response.data.resultCode === 0) {
+                    // got success as touching password and email and now get user data with authUser
                     dispatch(authUser());
-                } else{
+                } else {
+                    if (response.data.resultCode === 10){
+                        dispatch(getCaptchaUrl());
+                    }
                    let message = response.data.messages.length > 0 ?
                        response.data.messages[0]:
                        "Error";
@@ -63,6 +69,22 @@ export const login = (email, password, rememberMe) => {
             });
     }
 };
+
+export const getCaptchaUrl = () => {
+    return(dispatch) => {
+        securityAPI.getCaptchaUrl()
+            .then(response => {
+             const captchaUrl = response.data.url;
+                dispatch(setCaptchaUrl(captchaUrl))
+            });
+
+    }
+};
+
+
+
+
+
 
 export const logout = () => {
     return(dispatch) => {
@@ -75,5 +97,7 @@ export const logout = () => {
             });
     }
 };
+
+
 
 export default authReducer;
